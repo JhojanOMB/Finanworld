@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FinanWorld - Créditos de libranza para pensionados</title>
+  <meta name="description" content="FinanWorld: préstamos por libranza diseñados para pensionados. Rápido, seguro y con asesor personal." />
+
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Pequeñas mejoras visuales */
+    .card-shadow{box-shadow:0 10px 30px rgba(2,6,23,.08);}
+    .glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(6px)}
+    .whatsapp-float{width:64px;height:64px;border-radius:9999px;box-shadow:0 8px 20px rgba(16,24,40,.12)}
+  </style>
+</head>
+<body class="bg-gradient-to-b from-sky-50 to-white text-slate-800 leading-relaxed">
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-sm border-b border-slate-100">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="#" class="flex items-center gap-3">
+        <img src="https://via.placeholder.com/48x48.png?text=FW" alt="FinanWorld" class="rounded-full w-11 h-11" />
+        <div>
+          <div class="font-semibold text-sky-600">FinanWorld</div>
+          <div class="text-xs text-slate-400">Créditos de libranza para pensionados</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#requisitos" class="text-sm hover:text-sky-600">Requisitos</a>
+        <a href="#beneficios" class="text-sm hover:text-sky-600">Beneficios</a>
+        <a href="#proceso" class="text-sm hover:text-sky-600">Proceso</a>
+        <a href="#faq" class="text-sm hover:text-sky-600">FAQ</a>
+        <button id="openContact" class="ml-2 inline-flex items-center gap-2 rounded-md bg-sky-600 text-white px-4 py-2 text-sm shadow"> 
+          <i class="fa-solid fa-comments"></i> Contactar
+        </button>
+      </nav>
+
+      <button id="menuBtn" class="md:hidden p-2 rounded-md text-slate-600 hover:bg-slate-100">
+        <i class="fa-solid fa-bars fa-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="md:hidden px-4 pb-4 hidden">
+    <div class="flex flex-col gap-3 text-sm">
+      <a href="#requisitos" class="block">Requisitos</a>
+      <a href="#beneficios" class="block">Beneficios</a>
+      <a href="#proceso" class="block">Proceso</a>
+      <a href="#faq" class="block">FAQ</a>
+      <button id="openContactMobile" class="w-full text-left rounded-md bg-sky-600 text-white px-4 py-2">Contactar</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="pt-10 pb-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+      <div class="lg:col-span-7">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900">Créditos de libranza pensados para pensionados</h1>
+        <p class="mt-4 text-lg text-slate-600">Rápido, transparente y seguro. Descuento directo de la pensión, asesor personal y opciones flexibles para que tu cuota no afecte tu tranquilidad.</p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#simulador" class="inline-flex items-center gap-2 bg-sky-600 text-white px-4 py-2 rounded-md shadow"> 
+            <i class="fa-solid fa-calculator"></i> Simula tu cuota
+          </a>
+          <button id="openContactHero" class="inline-flex items-center gap-2 border border-slate-200 px-4 py-2 rounded-md"> 
+            <i class="fa-solid fa-paper-plane"></i> Habla con un asesor
+          </button>
+        </div>
+
+        <ul class="mt-6 flex flex-wrap gap-4 text-slate-500">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Aprobación rápida</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-lock text-green-600"></i> Seguridad y privacidad</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-percent text-green-600"></i> Tasas competitivas</li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="bg-white rounded-2xl p-6 card-shadow glass">
+          <h3 class="text-lg font-semibold">Solicita tu crédito</h3>
+          <p class="text-sm text-slate-500 mt-1">Completa los datos y un asesor te contactará.</p>
+
+          <form id="quickForm" class="mt-4 space-y-3">
+            <div>
+              <label class="text-sm font-medium">Nombre completo <span class="text-red-500">*</span></label>
+              <input id="qname" type="text" class="w-full mt-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-200" required />
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+              <div class="col-span-2">
+                <label class="text-sm font-medium">Teléfono <span class="text-red-500">*</span></label>
+                <input id="qphone" type="tel" placeholder="+57 300 000 0000" class="w-full mt-1 px-3 py-2 border rounded-md" required />
+              </div>
+              <div>
+                <label class="text-sm font-medium">Pensión</label>
+                <input id="qpension" type="number" min="0" placeholder="COP" class="w-full mt-1 px-3 py-2 border rounded-md" />
+              </div>
+            </div>
+
+            <div class="flex gap-2">
+              <button type="submit" class="flex-1 inline-flex items-center justify-center gap-2 bg-sky-600 text-white px-4 py-2 rounded-md">Enviar solicitud</button>
+              <a href="#requisitos" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border">Requisitos</a>
+            </div>
+
+            <div id="quickFeedback" class="text-sm text-green-600 hidden">Solicitud enviada. Un asesor te contactará.</div>
+          </form>
+        </div>
+
+        <div class="mt-4 text-sm text-slate-500">
+          <strong>Consejo:</strong> Ten a la mano tu documento y el certificado de pensión para agilizar la verificación.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section id="requisitos" class="py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-2xl font-bold">Requisitos para solicitar tu crédito de libranza</h2>
+        <p class="mt-2 text-slate-600">Te dejamos un checklist mejorado para que no pierdas tiempo y aumentes tus posibilidades de aprobación.</p>
+
+        <ul class="mt-4 space-y-3">
+          <li class="flex gap-3 items-start"><span class="mt-1 text-sky-600"><i class="fa-solid fa-id-card"></i></span><div><strong>Ser pensionado(a)</strong> con cédula colombiana vigente.</div></li>
+          <li class="flex gap-3 items-start"><span class="mt-1 text-sky-600"><i class="fa-solid fa-copy"></i></span><div><strong>Fotocopia de la cédula</strong> (frente y dorso) en formato legible.</div></li>
+          <li class="flex gap-3 items-start"><span class="mt-1 text-sky-600"><i class="fa-solid fa-file-invoice-dollar"></i></span><div><strong>Certificado de pensión</strong> o extracto reciente que indique el monto y entidad pagadora.</div></li>
+          <li class="flex gap-3 items-start"><span class="mt-1 text-sky-600"><i class="fa-solid fa-receipt"></i></span><div>Últimos <strong>3 comprobantes</strong> de pago o certificado bancario.</div></li>
+          <li class="flex gap-3 items-start"><span class="mt-1 text-sky-600"><i class="fa-solid fa-pen"></i></span><div><strong>Autorización para descuento por libranza</strong> o carta de la entidad pagadora (si aplica).</div></li>
+          <li class="flex gap-3 items-start"><span class="mt-1 text-sky-600"><i class="fa-solid fa-phone"></i></span><div>Información de contacto y <strong>cuenta bancaria</strong> para desembolso.</div></li>
+        </ul>
+
+        <p class="mt-4 text-sm text-slate-500">Te revisamos los documentos <strong>sin costo</strong> antes de enviar la solicitud para evitar rechazos.</p>
+
+        <div class="mt-3">
+          <button id="needDocs" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border">Necesito ayuda con los documentos</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="bg-white rounded-2xl p-5 card-shadow">
+          <h3 class="font-semibold">Validaciones y ayudas</h3>
+          <p class="mt-2 text-sm text-slate-500">Nuestro equipo verifica tus documentos y te indica qué falta antes de enviar la solicitud oficial.</p>
+
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-3 border rounded-md">
+              <div class="text-sky-600 text-xl"><i class="fa-solid fa-file-check"></i></div>
+              <div class="mt-2"><strong>Chequeo documental</strong><div class="text-sm text-slate-500">Evita retrabajos y rechazos.</div></div>
+            </div>
+            <div class="p-3 border rounded-md">
+              <div class="text-sky-600 text-xl"><i class="fa-solid fa-clock"></i></div>
+              <div class="mt-2"><strong>Aprobación ágil</strong><div class="text-sm text-slate-500">Procesos optimizados.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios" class="py-12 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold">Beneficios de elegir FinanWorld</h2>
+      <p class="mt-2 text-slate-600">Soluciones pensadas para tu tranquilidad financiera.</p>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="bg-white p-6 rounded-2xl card-shadow">
+        <div class="text-sky-600 text-2xl"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <h3 class="mt-3 font-semibold">Descuento seguro por libranza</h3>
+        <p class="mt-2 text-sm text-slate-500">Descuento autorizado directamente de tu pensión para mayor comodidad y seguridad.</p>
+      </article>
+
+      <article class="bg-white p-6 rounded-2xl card-shadow">
+        <div class="text-sky-600 text-2xl"><i class="fa-solid fa-percent"></i></div>
+        <h3 class="mt-3 font-semibold">Tasas competitivas</h3>
+        <p class="mt-2 text-sm text-slate-500">Condiciones transparentes y comparables para que sepas exactamente lo que pagas.</p>
+      </article>
+
+      <article class="bg-white p-6 rounded-2xl card-shadow">
+        <div class="text-sky-600 text-2xl"><i class="fa-solid fa-user-tie"></i></div>
+        <h3 class="mt-3 font-semibold">Asesor personal</h3>
+        <p class="mt-2 text-sm text-slate-500">Acompañamiento desde la solicitud hasta el desembolso.</p>
+      </article>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white p-4 rounded-lg card-shadow">
+        <h4 class="font-semibold">Protecciones</h4>
+        <ul class="mt-2 text-sm text-slate-500 space-y-1">
+          <li>Confidencialidad y manejo seguro de tus datos.</li>
+          <li>Plataforma segura para intercambio de documentos.</li>
+          <li>Opciones de seguro de vida vinculadas al crédito (opcional).</li>
+        </ul>
+      </div>
+      <div class="bg-white p-4 rounded-lg card-shadow">
+        <h4 class="font-semibold">Flexibilidad</h4>
+        <p class="mt-2 text-sm text-slate-500">Plazos y cuotas ajustables para que la cuota no supere un porcentaje razonable de tu pensión.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-center">Nuestro proceso en 4 pasos</h2>
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="text-center p-4 bg-white rounded-xl card-shadow">
+        <div class="text-3xl text-sky-600"><i class="fa-solid fa-file-lines"></i></div>
+        <h4 class="mt-3 font-semibold">1. Reúnes documentos</h4>
+        <p class="text-sm text-slate-500 mt-2">Checklist y ayuda para escanear.</p>
+      </div>
+      <div class="text-center p-4 bg-white rounded-xl card-shadow">
+        <div class="text-3xl text-sky-600"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h4 class="mt-3 font-semibold">2. Evaluación</h4>
+        <p class="text-sm text-slate-500 mt-2">Análisis rápido por el equipo.</p>
+      </div>
+      <div class="text-center p-4 bg-white rounded-xl card-shadow">
+        <div class="text-3xl text-sky-600"><i class="fa-solid fa-check-to-slot"></i></div>
+        <h4 class="mt-3 font-semibold">3. Aprobación</h4>
+        <p class="text-sm text-slate-500 mt-2">Firma digital y confirmación de condiciones.</p>
+      </div>
+      <div class="text-center p-4 bg-white rounded-xl card-shadow">
+        <div class="text-3xl text-sky-600"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <h4 class="mt-3 font-semibold">4. Desembolso</h4>
+        <p class="text-sm text-slate-500 mt-2">Dinero en tu cuenta según lo pactado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULADOR -->
+<section id="simulador" class="py-12 bg-slate-50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h3 class="text-xl font-bold text-center">Simulador de crédito</h3>
+    <p class="text-sm text-slate-500 text-center mt-2">Cálculo referencial. La cuota final depende de la evaluación y seguros.</p>
+
+    <div class="mt-6 bg-white p-6 rounded-2xl card-shadow">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+        <div>
+          <label class="text-sm font-medium">Monto solicitado (COP)</label>
+          <input id="amount" type="number" placeholder="5000000" class="w-full mt-1 px-3 py-2 border rounded-md" />
+        </div>
+        <div>
+          <label class="text-sm font-medium">Plazo (meses)</label>
+          <select id="months" class="w-full mt-1 px-3 py-2 border rounded-md">
+            <option value="12">12</option>
+            <option value="24">24</option>
+            <option value="36" selected>36</option>
+            <option value="48">48</option>
+            <option value="60">60</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-medium">Tasa anual (%)</label>
+          <input id="rate" type="number" class="w-full mt-1 px-3 py-2 border rounded-md" value="18" />
+        </div>
+      </div>
+
+      <div class="mt-4 text-right">
+        <button id="calc" class="inline-flex items-center gap-2 bg-sky-600 text-white px-4 py-2 rounded-md">Calcular</button>
+      </div>
+
+      <div id="simResult" class="mt-4 hidden">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50 rounded-md">
+            <div class="text-sm text-slate-500">Cuota mensual</div>
+            <div id="monthly" class="text-xl font-semibold mt-1"></div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-md">
+            <div class="text-sm text-slate-500">Costo total del crédito</div>
+            <div id="total" class="text-xl font-semibold mt-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h3 class="text-xl font-bold text-center">Preguntas frecuentes</h3>
+    <div class="mt-6 space-y-3">
+      <details class="bg-white p-4 rounded-lg card-shadow">
+        <summary class="font-medium cursor-pointer">¿Quién puede aplicar?</summary>
+        <div class="mt-2 text-sm text-slate-500">Pensionados con cédula colombiana y comprobante de pensión. La disponibilidad depende de la entidad pagadora y la evaluación crediticia.</div>
+      </details>
+
+      <details class="bg-white p-4 rounded-lg card-shadow">
+        <summary class="font-medium cursor-pointer">¿Cuánto tarda la aprobación?</summary>
+        <div class="mt-2 text-sm text-slate-500">La pre-evaluación normalmente toma entre 24 y 72 horas. El tiempo final depende de la verificación de documentos y la entidad pagadora.</div>
+      </details>
+
+      <details class="bg-white p-4 rounded-lg card-shadow">
+        <summary class="font-medium cursor-pointer">¿Hay cobros ocultos?</summary>
+        <div class="mt-2 text-sm text-slate-500">No. Informamos todas las comisiones y seguros antes de la firma. Nuestro compromiso es la transparencia.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="py-12 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h3 class="text-xl font-bold text-center">Lo que dicen nuestros clientes</h3>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white p-4 rounded-lg card-shadow">
+        <p class="text-sm text-slate-500">"FinanWorld me ayudó cuando más lo necesitaba. El proceso fue claro y el asesor muy atento."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <img src="https://via.placeholder.com/48" class="rounded-full" alt="cliente" />
+          <div>
+            <div class="font-semibold">María P.</div>
+            <div class="text-sm text-slate-400">Pensionada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg card-shadow">
+        <p class="text-sm text-slate-500">"El descuento por libranza me dio la tranquilidad de no preocuparme por pagos mensuales."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <img src="https://via.placeholder.com/48" class="rounded-full" alt="cliente" />
+          <div>
+            <div class="font-semibold">Julián R.</div>
+            <div class="text-sm text-slate-400">Pensionado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-slate-800 text-slate-100 py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <div class="font-semibold text-lg">FinanWorld</div>
+      <div class="text-sm text-slate-400 mt-2">Créditos de libranza para pensionados. Transparencia, seguridad y asesoría personalizada.</div>
+    </div>
+    <div>
+      <div class="font-medium">Contacto</div>
+      <div class="text-sm mt-2">Tel: <a class="text-sky-300" href="tel:+573000000000">+57 300 000 0000</a></div>
+      <div class="text-sm">Email: <a class="text-sky-300" href="mailto:contacto@finanworld.com">contacto@finanworld.com</a></div>
+    </div>
+    <div class="text-right md:text-left">
+      <div class="text-sm">© <span id="year"></span> FinanWorld. Todos los derechos reservados.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a id="waButton" class="fixed right-5 bottom-5 whatsapp-float bg-emerald-500 text-white flex items-center justify-center" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=+573000000000&text=Hola%20FinanWorld%2C%20quiero%20informaci%C3%B3n%20sobre%20cr%C3%A9dito%20de%20libranza%20.%20Mi%20nombre%20es%3A">
+  <i class="fa-brands fa-whatsapp fa-2x"></i>
+</a>
+
+<!-- SLIDE OVER CONTACT (OFFCANVAS) -->
+<div id="contactPanel" class="fixed inset-0 z-50 hidden">
+  <div id="backdrop" class="absolute inset-0 bg-black/40"></div>
+  <aside class="absolute right-0 top-0 h-full w-full sm:w-96 bg-white p-6 overflow-auto">
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-semibold">Contactar a un asesor</h3>
+      <button id="closeContact" class="p-2 rounded-md text-slate-600 hover:bg-slate-100"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <p class="text-sm text-slate-500 mt-2">Completa el formulario y un asesor te responderá lo antes posible. También puedes escribirnos por WhatsApp.</p>
+
+    <form id="contactForm" class="mt-4 space-y-3">
+      <div>
+        <label class="text-sm font-medium">Nombre completo <span class="text-red-500">*</span></label>
+        <input id="name" class="w-full mt-1 px-3 py-2 border rounded-md" required />
+      </div>
+      <div>
+        <label class="text-sm font-medium">Teléfono <span class="text-red-500">*</span></label>
+        <input id="phone" placeholder="+57 300 000 0000" class="w-full mt-1 px-3 py-2 border rounded-md" required />
+      </div>
+      <div>
+        <label class="text-sm font-medium">Correo electrónico</label>
+        <input id="email" type="email" class="w-full mt-1 px-3 py-2 border rounded-md" />
+      </div>
+      <div>
+        <label class="text-sm font-medium">Mensaje</label>
+        <textarea id="message" rows="4" class="w-full mt-1 px-3 py-2 border rounded-md" placeholder="Cuéntanos brevemente tu solicitud"></textarea>
+      </div>
+
+      <div class="flex gap-2">
+        <button type="submit" class="flex-1 inline-flex items-center justify-center gap-2 bg-sky-600 text-white px-4 py-2 rounded-md">Enviar solicitud</button>
+        <a id="waQuick" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border px-4 py-2 rounded-md text-emerald-600" href="#">Contactar por WhatsApp</a>
+      </div>
+
+      <div id="contactFeedback" class="text-sm text-green-600 hidden">Gracias, tu solicitud fue enviada.</div>
+    </form>
+
+    <hr class="my-4" />
+    <div>
+      <h4 class="font-medium">Horario de atención</h4>
+      <p class="text-sm text-slate-500 mt-1">Lunes a Viernes: 8:30 - 17:30 | Sábado: 9:00 - 13:00</p>
+    </div>
+  </aside>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+
+  // Contact slide-over
+  const contactPanel = document.getElementById('contactPanel');
+  const openBtns = [document.getElementById('openContact'), document.getElementById('openContactHero'), document.getElementById('openContactMobile'), document.getElementById('needDocs')];
+  openBtns.forEach(b=>{ if(b) b.addEventListener('click', ()=> contactPanel.classList.remove('hidden')) });
+  document.getElementById('closeContact').addEventListener('click', ()=> contactPanel.classList.add('hidden'));
+  document.getElementById('backdrop').addEventListener('click', ()=> contactPanel.classList.add('hidden'));
+
+  // Quick form submit
+  document.getElementById('quickForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name = document.getElementById('qname').value.trim();
+    const phone = document.getElementById('qphone').value.trim();
+    if(!name || !phone){ alert('Completa los campos obligatorios.'); return; }
+    try{
+      await fetch('/api/solicitudes', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,phone,pension:document.getElementById('qpension').value})});
+      document.getElementById('quickFeedback').classList.remove('hidden');
+      this.reset();
+    }catch(err){
+      const subject = encodeURIComponent('Solicitud de crédito - FinanWorld');
+      const body = encodeURIComponent(`Nombre: ${name}\nTeléfono: ${phone}`);
+      window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
+    }
+  });
+
+  // Contact form
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const n = document.getElementById('name').value.trim();
+    const p = document.getElementById('phone').value.trim();
+    if(!n || !p){ alert('Nombre y teléfono son obligatorios.'); return; }
+    try{
+      await fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name:n,phone:p,email:document.getElementById('email').value,message:document.getElementById('message').value})});
+      document.getElementById('contactFeedback').classList.remove('hidden');
+      this.reset();
+    }catch(err){
+      const text = encodeURIComponent(`Hola FinanWorld, mi nombre es ${n} y quiero información sobre crédito de libranza. Mi teléfono es ${p}.`);
+      window.open(`https://api.whatsapp.com/send?phone=+573000000000&text=${text}`, '_blank');
+    }
+  });
+
+  // Update WhatsApp quick links
+  function updateWhatsAppLinks(){
+    const waBase = 'https://api.whatsapp.com/send?phone=+573000000000&text=';
+    const quickText = encodeURIComponent('Hola FinanWorld, quisiera información sobre crédito de libranza. Mi nombre es:');
+    document.getElementById('waQuick').href = waBase + quickText;
+    document.getElementById('waButton').href = waBase + encodeURIComponent('Hola FinanWorld, quiero información sobre crédito de libranza. Mi nombre es:');
+  }
+  updateWhatsAppLinks();
+
+  // Simulador
+  function currencyCOP(n){ return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP'}).format(n); }
+  document.getElementById('calc').addEventListener('click', function(){
+    const amount = Number(document.getElementById('amount').value) || 0;
+    const months = Number(document.getElementById('months').value);
+    const annualRate = Number(document.getElementById('rate').value)/100;
+    if(amount <= 0){ alert('Ingresa un monto válido'); return; }
+    const monthlyRate = annualRate / 12;
+    const monthly = (amount * monthlyRate) / (1 - Math.pow(1+monthlyRate, -months));
+    const total = monthly * months;
+    document.getElementById('monthly').textContent = currencyCOP(monthly.toFixed(2));
+    document.getElementById('total').textContent = currencyCOP(total.toFixed(2));
+    document.getElementById('simResult').classList.remove('hidden');
+  });
+</script>
+</body>
+</html>
