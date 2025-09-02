@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FinanWorld - Créditos de libranza para pensionados</title>
   <meta name="description" content="FinanWorld: préstamos por libranza diseñados para pensionados. Rápido, seguro y con asesor personal." />
+  <link rel="stylesheet" href="./css/estilo.css">
 
   <!-- Tailwind Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    .card-shadow{box-shadow:0 10px 30px rgba(0,0,0,.3);}
-    .whatsapp-float{width:64px;height:64px;border-radius:9999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
-    .contact-float{width:56px;height:56px;border-radius:9999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
-  </style>
 </head>
 <body class="bg-gradient-to-b from-sky-50 to-white text-slate-800 leading-relaxed">
 
@@ -25,7 +21,7 @@
       <a href="#" class="flex items-center gap-3">
         <img src="https://via.placeholder.com/48x48.png?text=FW" alt="FinanWorld" class="rounded-full w-11 h-11" />
         <div>
-          <div class="font-semibold text-sky-600">FinanWorld</div>
+          <div class="font-semibold text-yellow-600 font-bold">FinanWorld</div>
           <div class="text-xs text-slate-400">Créditos de libranza para pensionados</div>
         </div>
       </a>
@@ -75,7 +71,7 @@
         <!-- CTA -->
         <div class="mt-8 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
           <button id="openContactHero" 
-            class="inline-flex items-center justify-center gap-2 bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition">
+            class="inline-flex items-center justify-center gap-2 bg-gray-500 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition">
             <i class="fa-solid fa-paper-plane"></i> Solicita tu crédito ahora
           </button>
 
@@ -95,8 +91,8 @@
 
       <!-- Imagen / ilustración -->
       <div class="lg:col-span-6 flex justify-center lg:justify-end">
-        <img src="https://via.placeholder.com/500x400.png?text=FinanWorld" alt="Crédito de libranza para pensionados"
-          class="rounded-2xl shadow-xl max-w-sm lg:max-w-md">
+        <img src="./media/hero.png" alt="Crédito de libranza para pensionados"
+          class="max-w-sm lg:max-w-md">
       </div>
 
     </div>
@@ -105,7 +101,6 @@
   <!-- Detalle decorativo -->
   <div class="absolute inset-0 -z-10 bg-gradient-to-tr from-yellow-100/20 to-transparent"></div>
 </section>
-
 
 <!-- REQUISITOS -->
 <section id="requisitos" class="py-12">
@@ -130,25 +125,6 @@
           <button id="needDocs" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border">Necesito ayuda con los documentos</button>
         </div>
       </div>
-
-      <div>
-        <div class="bg-white rounded-2xl p-5 card-shadow">
-          <h3 class="font-semibold">Validaciones y ayudas</h3>
-          <p class="mt-2 text-sm text-slate-500">Nuestro equipo verifica tus documentos y te indica qué falta antes de enviar la solicitud oficial.</p>
-
-          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div class="p-3 border rounded-md">
-              <div class="text-sky-600 text-xl"><i class="fa-solid fa-file-check"></i></div>
-              <div class="mt-2"><strong>Chequeo documental</strong><div class="text-sm text-slate-500">Evita retrabajos y rechazos.</div></div>
-            </div>
-            <div class="p-3 border rounded-md">
-              <div class="text-sky-600 text-xl"><i class="fa-solid fa-clock"></i></div>
-              <div class="mt-2"><strong>Aprobación ágil</strong><div class="text-sm text-slate-500">Procesos optimizados.</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -194,6 +170,31 @@
         <h4 class="font-semibold">Flexibilidad</h4>
         <p class="mt-2 text-sm text-slate-500">Plazos y cuotas ajustables para que la cuota no supere un porcentaje razonable de tu pensión.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN ALIADOS / CARRUSEL -->
+<section id="aliados" class="py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-center">Nuestros Aliados</h2>
+    <p class="text-center mt-2 mb-6">Confiamos en estos socios para ofrecerte lo mejor.</p>
+
+    <div class="relative overflow-hidden">
+      <div id="carousel" class="flex transition-transform duration-500">
+        <!-- Cada aliado -->
+        <div class="flex-none w-40 mx-3">
+          <img src="./media/porvenir.png" alt="porvenir" class="rounded-lg shadow-lg border border-yellow-400 p-5" />
+        </div>
+      </div>
+
+      <!-- Flechas -->
+      <button id="prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-yellow-500 text-black p-2 rounded-full shadow hover:bg-yellow-400 transition">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button id="next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-yellow-500 text-black p-2 rounded-full shadow hover:bg-yellow-400 transition">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 </section>
@@ -317,13 +318,19 @@
 </a>
 
 <!-- BOTÓN FLOTANTE SOLICITA TU CRÉDITO -->
-<button id="btnFloatingCredit" 
+<button id="openContactHero" 
     class="fixed right-0 top-1/2 -translate-y-1/2 z-50 origin-bottom-right -rotate-90 
-           bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 
-           text-black font-semibold px-5 py-2 rounded-t-xl shadow-xl 
-           hover:from-gray-700 hover:via-gray-800 hover:to-black hover:text-yellow-400 
-           transition-all duration-300">
+          bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-600
+          text-black font-bold tracking-wide uppercase px-6 py-3 rounded-t-xl
+          shadow-lg overflow-hidden transition-all duration-500 ease-in-out
+          hover:scale-105 hover:shadow-[0_0_25px_rgba(255,215,0,0.8)] hover:text-yellow-100">
   Solicita tu crédito
+    <!-- efecto brillo -->
+    <span class="absolute top-0 left-0 w-full h-full bg-gradient-to-r 
+                from-transparent via-white/30 to-transparent
+                translate-x-[-100%] skew-x-[-20deg] 
+                animate-[shine_3s_linear_infinite]"></span>
+
 </button>
 
 <!-- SLIDE OVER CONTACT (OFFCANVAS) -->
@@ -370,96 +377,7 @@
   </aside>
 </div>
 
-<!-- SCRIPTS -->
-<script>
-  // Footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
+<script src="./js/script.js"></script>
 
-  // Mobile menu toggle
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  menuBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
-
-  // Contact slide-over
-  const contactPanel = document.getElementById('contactPanel');
-  const openBtns = [document.getElementById('openContact'), document.getElementById('openContactHero'), document.getElementById('openContactMobile'), document.getElementById('needDocs')];
-  openBtns.forEach(b=>{ if(b) b.addEventListener('click', ()=> contactPanel.classList.remove('hidden')) });
-  document.getElementById('closeContact').addEventListener('click', ()=> contactPanel.classList.add('hidden'));
-  document.getElementById('backdrop').addEventListener('click', ()=> contactPanel.classList.add('hidden'));
-
-  // Quick form submit
-  document.getElementById('quickForm').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const name = document.getElementById('qname').value.trim();
-    const phone = document.getElementById('qphone').value.trim();
-    if(!name || !phone){ alert('Completa los campos obligatorios.'); return; }
-    try{
-      await fetch('/api/solicitudes', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,phone,pension:document.getElementById('qpension').value})});
-      document.getElementById('quickFeedback').classList.remove('hidden');
-      this.reset();
-    }catch(err){
-      const subject = encodeURIComponent('Solicitud de crédito - FinanWorld');
-      const body = encodeURIComponent(`Nombre: ${name}\nTeléfono: ${phone}`);
-      window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
-    }
-  });
-
-  // Hacer que abra el mismo panel del id="openContactHero"
-  document.getElementById("btnFloatingCredit").onclick = function() {
-    document.getElementById("openContactHero").click();
-  };
-
-  // Contact form
-  document.getElementById('contactForm').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const n = document.getElementById('name').value.trim();
-    const p = document.getElementById('phone').value.trim();
-    const em = document.getElementById('email').value.trim();
-    const m = document.getElementById('message').value.trim();
-    
-    if(!n || !p){ 
-      alert('Nombre y teléfono son obligatorios.'); 
-      return; 
-    }
-    try{
-      await fetch('/api/contact', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({name: n, phone: p, email: em, message: m})
-      });
-      document.getElementById('contactFeedback').classList.remove('hidden');
-      this.reset();
-    }catch(err){
-      // fallback: abrir correo
-      const subject = encodeURIComponent('Contacto - FinanWorld');
-      const body = encodeURIComponent(`Nombre: ${n}\nTeléfono: ${p}\nCorreo: ${em}\nMensaje: ${m}`);
-      window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
-    }
-  });
-
-  // Update WhatsApp quick links
-  function updateWhatsAppLinks(){
-    const waBase = 'https://api.whatsapp.com/send?phone=+573000000000&text=';
-    const quickText = encodeURIComponent('Hola FinanWorld, quisiera información sobre crédito de libranza. Mi nombre es:');
-    document.getElementById('waQuick').href = waBase + quickText;
-    document.getElementById('waButton').href = waBase + encodeURIComponent('Hola FinanWorld, quiero información sobre crédito de libranza. Mi nombre es:');
-  }
-  updateWhatsAppLinks();
-
-  // Simulador
-  function currencyCOP(n){ return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP'}).format(n); }
-  document.getElementById('calc').addEventListener('click', function(){
-    const amount = Number(document.getElementById('amount').value) || 0;
-    const months = Number(document.getElementById('months').value);
-    const annualRate = Number(document.getElementById('rate').value)/100;
-    if(amount <= 0){ alert('Ingresa un monto válido'); return; }
-    const monthlyRate = annualRate / 12;
-    const monthly = (amount * monthlyRate) / (1 - Math.pow(1+monthlyRate, -months));
-    const total = monthly * months;
-    document.getElementById('monthly').textContent = currencyCOP(monthly.toFixed(2));
-    document.getElementById('total').textContent = currencyCOP(total.toFixed(2));
-    document.getElementById('simResult').classList.remove('hidden');
-  });
-</script>
 </body>
 </html>
