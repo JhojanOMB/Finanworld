@@ -1,12 +1,3 @@
-/**
- * main.js - Script completo para FinanWorld
- * - Seguro contra elementos faltantes
- * - Simulador robusto (maneja tasa 0 y validaciones)
- * - Formularios con fallback mailto
- * - Slide-over de contacto y sidebar móvil con overlay + bloqueo de scroll
- * - Carousel con clamping
- */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // helper
@@ -19,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Contact slide-over (panel) ---
   const contactPanel = $('contactPanel');
-  const openContactIds = ['openContact', 'openContactHero', 'openContactMobile', 'needDocs'];
+  const openContactIds = ['openContact', 'openContactHero', 'openContactMobile', 'needDocs', 'openContactLateral'];
   openContactIds.forEach(id => {
     const btn = $(id);
     if (btn && contactPanel) {
@@ -48,109 +39,89 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.remove('overflow-hidden');
     });
   }
+// --- Quick form submit ---
+if ($('quickForm')) {
+  $('quickForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const name = $('qname')?.value.trim() || '';
+    const phone = $('qphone')?.value.trim() || '';
+    const pension = $('qpension')?.value || '';
+    if (!name || !phone) {
+      alert('Completa los campos obligatorios.');
+      return;
+    }
 
-  // --- Quick form submit ---
-  if ($('quickForm')) {
-    $('quickForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const name = $('qname')?.value.trim() || '';
-      const phone = $('qphone')?.value.trim() || '';
-      const pension = $('qpension')?.value || '';
-      if (!name || !phone) {
-        alert('Completa los campos obligatorios.');
-        return;
-      }
-      try {
-        await fetch('/api/solicitudes', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, phone, pension })
-        });
-        if ($('quickFeedback')) $('quickFeedback').classList.remove('hidden');
-        this.reset();
-      } catch (err) {
-        // fallback: abrir mailto
-        const subject = encodeURIComponent('Solicitud de crédito - FinanWorld');
-        const body = encodeURIComponent(`Nombre: ${name}\nTeléfono: ${phone}\nPensión: ${pension}`);
-        window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
-      }
-    });
-  }
+    try {
+      await fetch('/api/solicitudes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, pension })
+      });
 
-  // --- Contact form submit ---
-  if ($('contactForm')) {
-    $('contactForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const n = $('name')?.value.trim() || '';
-      const p = $('phone')?.value.trim() || '';
-      const em = $('email')?.value.trim() || '';
-      const m = $('message')?.value.trim() || '';
-      if (!n || !p) {
-        alert('Nombre y teléfono son obligatorios.');
-        return;
-      }
-      try {
-        await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: n, phone: p, email: em, message: m })
-        });
-        if ($('contactFeedback')) $('contactFeedback').classList.remove('hidden');
-        this.reset();
-      } catch (err) {
-        const subject = encodeURIComponent('Contacto - FinanWorld');
-        const body = encodeURIComponent(`Nombre: ${n}\nTeléfono: ${p}\nCorreo: ${em}\nMensaje: ${m}`);
-        window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
-      }
-    });
-  }
+      // ✅ Generar mensaje con datos a WhatsApp
+      const waBase = 'https://api.whatsapp.com/send?phone=+573025934518&text=';
+      const waMessage = encodeURIComponent(
+        `Hola FinanWorld, quisiera información sobre crédito de libranza.\n\n` +
+        `Nombre: ${name}\nTeléfono: ${phone}\nPensión: ${pension}`
+      );
+      window.open(waBase + waMessage, '_blank');
 
-  // --- WhatsApp quick links ---
-  function updateWhatsAppLinks() {
-    const waBase = 'https://api.whatsapp.com/send?phone=+573000000000&text=';
-    const quickText = encodeURIComponent('Hola FinanWorld, quisiera información sobre crédito de libranza. Mi nombre es:');
-    if ($('waQuick')) $('waQuick').href = waBase + quickText;
-    if ($('waButton')) $('waButton').href = waBase + encodeURIComponent('Hola FinanWorld, quiero información sobre crédito de libranza. Mi nombre es:');
-  }
-  updateWhatsAppLinks();
+      if ($('quickFeedback')) $('quickFeedback').classList.remove('hidden');
+      this.reset();
+    } catch (err) {
+      const subject = encodeURIComponent('Solicitud de crédito - FinanWorld');
+      const body = encodeURIComponent(`Nombre: ${name}\nTeléfono: ${phone}\nPensión: ${pension}`);
+      window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
+    }
+  });
+}
 
-  // --- Simulador de crédito ---
-  function currencyCOP(n) {
-    const num = typeof n === 'string' ? Number(n) : n;
-    if (Number.isNaN(num)) return 'COP 0';
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(num);
-  }
+// --- Contact form submit ---
+if ($('contactForm')) {
+  $('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const n = $('name')?.value.trim() || '';
+    const p = $('phone')?.value.trim() || '';
+    const em = $('email')?.value.trim() || '';
+    const m = $('message')?.value.trim() || '';
+    if (!n || !p) {
+      alert('Nombre y teléfono son obligatorios.');
+      return;
+    }
 
-  if ($('calc')) {
-    $('calc').addEventListener('click', function () {
-      const amount = Number($('amount')?.value) || 0;
-      const months = Math.trunc(Number($('months')?.value) || 0);
-      const annualRate = Number($('rate')?.value) / 100 || 0;
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: n, phone: p, email: em, message: m })
+      });
 
-      if (amount <= 0) { alert('Ingresa un monto válido'); return; }
-      if (months <= 0) { alert('Ingresa un número de meses válido'); return; }
+      // ✅ Generar mensaje con datos a WhatsApp
+      const waBase = 'https://api.whatsapp.com/send?phone=+573025934518&text=';
+      const waMessage = encodeURIComponent(
+        `Hola FinanWorld, me gustaría ponerme en contacto.\n\n` +
+        `Nombre: ${n}\nTeléfono: ${p}\nCorreo: ${em}\nMensaje: ${m}`
+      );
+      window.open(waBase + waMessage, '_blank');
 
-      const monthlyRate = annualRate / 12;
-      let monthly = 0;
+      if ($('contactFeedback')) $('contactFeedback').classList.remove('hidden');
+      this.reset();
+    } catch (err) {
+      const subject = encodeURIComponent('Contacto - FinanWorld');
+      const body = encodeURIComponent(`Nombre: ${n}\nTeléfono: ${p}\nCorreo: ${em}\nMensaje: ${m}`);
+      window.location.href = `mailto:contacto@finanworld.com?subject=${subject}&body=${body}`;
+    }
+  });
+}
 
-      // Si la tasa es 0, cuota = monto / meses
-      if (monthlyRate === 0) {
-        monthly = amount / months;
-      } else {
-        const denom = 1 - Math.pow(1 + monthlyRate, -months);
-        if (denom === 0 || !isFinite(denom)) {
-          alert('Parámetros inválidos para cálculo. Revisa la tasa y los meses.');
-          return;
-        }
-        monthly = (amount * monthlyRate) / denom;
-      }
-
-      const total = monthly * months;
-      if ($('monthly')) $('monthly').textContent = currencyCOP(Number(monthly.toFixed(2)));
-      if ($('total')) $('total').textContent = currencyCOP(Number(total.toFixed(2)));
-      if ($('simResult')) $('simResult').classList.remove('hidden');
-    });
-  }
+// --- WhatsApp quick links ---
+function updateWhatsAppLinks() {
+  const waBase = 'https://api.whatsapp.com/send?phone=+573025934518&text=';
+  const quickText = encodeURIComponent('Hola FinanWorld, quisiera información sobre crédito de libranza. Mi nombre es:');
+  if ($('waQuick')) $('waQuick').href = waBase + quickText;
+  if ($('waButton')) $('waButton').href = waBase + encodeURIComponent('Hola FinanWorld, quiero información sobre crédito de libranza. Mi nombre es:');
+}
+updateWhatsAppLinks();
 
   // --- Carousel aliados (seguro) ---
   const carousel = $('carousel');

@@ -53,7 +53,7 @@
     <a href="#beneficios" class="block hover:text-yellow-600">Beneficios</a>
     <a href="#proceso" class="block hover:text-yellow-600">Proceso</a>
     <a href="#faq" class="block hover:text-yellow-600">FAQ</a>
-    <button id="openContactMobile" class="mt-4 w-full rounded-md bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2">Contactar</button>
+    <button id="openContactMobile" class="mt-4 w-full rounded-md bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2"><i class="fa-solid fa-comments"></i> Contactanos</button>
   </div>
 </div>
 
@@ -102,7 +102,7 @@
         </div>
 
         <!-- Beneficios rápidos -->
-        <ul class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-slate-700">
+        <ul class="mt-8 flex flex-wrap justify-center gap-4 text-slate-700">
           <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Aprobación rápida</li>
           <li class="flex items-center gap-2"><i class="fa-solid fa-lock text-green-600"></i> Seguridad total</li>
           <li class="flex items-center gap-2"><i class="fa-solid fa-percent text-green-600"></i> Tasas competitivas</li>
@@ -194,15 +194,34 @@
   </div>
 </section>
 
-<!-- COSAS A TENER EN CUENTA -->
-<section class="py-12">
+<!-- INFORMACIÓN CLAVE -->
+<section class="py-12 bg-slate-50">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h3 class="text-xl font-bold text-center">Cosas a tener en cuenta</h3>
-    <ul class="mt-6 list-disc list-inside text-sm text-slate-600 space-y-2">
-      <li>El crédito puede estar entre un monto de 25 millones a 45 millones según disponibilidad del estudio.</li>
-    </ul>
+    <div class="bg-white rounded-2xl shadow-lg p-8 border border-slate-200">
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <div class="text-yellow-600 text-2xl">
+          <i class="fa-solid fa-circle-info"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800">Información clave</h3>
+      </div>
+      <ul class="mt-4 space-y-3 text-slate-600 text-sm">
+        <li class="flex items-start gap-2">
+          <i class="fa-solid fa-check-circle text-green-500 mt-0.5"></i>
+          <span>El crédito puede estar entre un monto de 25 millones a 45 millones según disponibilidad del estudio.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fa-solid fa-check-circle text-green-500 mt-0.5"></i>
+          <span>Las condiciones y plazos se ajustan al perfil de cada cliente.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fa-solid fa-check-circle text-green-500 mt-0.5"></i>
+          <span>El proceso de aprobación está sujeto a verificación de la información suministrada.</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
+
 
 <!-- SECCIÓN ALIADOS / CARRUSEL -->
 <section id="aliados" class="py-12">
@@ -447,7 +466,6 @@
       <div class="bg-white p-4 rounded-lg card-shadow">
         <p class="text-sm text-slate-500">"FinanWorld me ayudó cuando más lo necesitaba. El proceso fue claro y el asesor muy atento."</p>
         <div class="mt-4 flex items-center gap-3">
-          <img src="https://via.placeholder.com/48" class="rounded-full" alt="cliente" />
           <div>
             <div class="font-semibold">María P.</div>
             <div class="text-sm text-slate-400">Pensionada</div>
@@ -458,7 +476,6 @@
       <div class="bg-white p-4 rounded-lg card-shadow">
         <p class="text-sm text-slate-500">"El descuento por libranza me dio la tranquilidad de no preocuparme por pagos mensuales."</p>
         <div class="mt-4 flex items-center gap-3">
-          <img src="https://via.placeholder.com/48" class="rounded-full" alt="cliente" />
           <div>
             <div class="font-semibold">Julián R.</div>
             <div class="text-sm text-slate-400">Pensionado</div>
@@ -500,26 +517,29 @@
 </footer>
 
 
-<!-- WHATSAPP FLOTANTE -->
-<a id="waButton" class="fixed right-5 bottom-5 whatsapp-float bg-emerald-500 text-white flex items-center justify-center" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=+573000000000&text=Hola%20FinanWorld%2C%20quiero%20informaci%C3%B3n%20sobre%20cr%C3%A9dito%20de%20libranza%20.%20Mi%20nombre%20es%3A">
-  <i class="fa-brands fa-whatsapp fa-2x"></i>
-</a>
+<div class="wrapper fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+  <!-- Botón flotante WhatsApp -->
+  <a id="waButton" href="#" target="_blank" class="group">
+    <div class="bg-green-500 hover:bg-green-600 rounded-full shadow-lg p-2 flex items-center justify-center w-14 h-14 relative">
+      <!-- Tooltip -->
+      <div class="absolute right-full mr-2 px-3 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity border border-black">
+        WhatsApp
+      </div>
+      <i class="fa-brands fa-whatsapp text-white text-3xl"></i>
+    </div>
+  </a>
 
-<!-- BOTÓN FLOTANTE SOLICITA TU CRÉDITO -->
-<button id="openContactHero" 
-    class="fixed right-0 top-1/2 -translate-y-1/2 z-50 origin-bottom-right -rotate-90 
-          bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-600
-          text-black font-bold tracking-wide uppercase px-6 py-3 rounded-t-xl
-          shadow-lg overflow-hidden transition-all duration-500 ease-in-out
-          hover:scale-105 hover:shadow-[0_0_25px_rgba(255,215,0,0.8)] hover:text-yellow-100">
-  Solicita tu crédito
-    <!-- efecto brillo -->
-    <span class="absolute top-0 left-0 w-full h-full bg-gradient-to-r 
-                from-transparent via-white/30 to-transparent
-                translate-x-[-100%] skew-x-[-20deg] 
-                animate-[shine_3s_linear_infinite]"></span>
-
-</button>
+  <!-- Botón flotante Solicita tu crédito -->
+  <button id="openContactLateral" class="group">
+    <div class="bg-yellow-500 hover:bg-yellow-600 rounded-full shadow-lg p-2 flex items-center justify-center w-14 h-14 relative">
+      <!-- Tooltip -->
+      <div class="absolute right-full mr-2 px-3 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity border border-black">
+        Solicita tu crédito
+      </div>
+      <i class="fa-solid fa-coins text-black text-2xl"></i>
+    </div>
+  </button>
+</div>
 
 <!-- SLIDE OVER CONTACT (OFFCANVAS) -->
 <div id="contactPanel" class="fixed inset-0 z-50 hidden">

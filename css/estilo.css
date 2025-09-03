@@ -3,8 +3,8 @@
     .contact-float{width:56px;height:56px;border-radius:9999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
 
 @keyframes shine {
-  0% { transform: translateX(-100%) skewX(-20deg); }
-  100% { transform: translateX(200%) skewX(-20deg); }
+  0%   { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(100%)  skewX(-20deg); }
 }
 
 .swiper-button-next:after, .swiper-button-prev:after {
@@ -14,3 +14,8 @@
 .swiper-button-next:after, .swiper-button-prev:after {
     font-size: 0.8rem !important;
 }
+
+
+  html, body {
+    overflow-x: hidden;
+  }
