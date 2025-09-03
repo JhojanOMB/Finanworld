@@ -99,3 +99,4 @@ next.addEventListener('click', ()=> {
   if(scrollAmount > maxScroll) scrollAmount = maxScroll;
   carousel.style.transform = `translateX(-${scrollAmount}px)`;
 });
+

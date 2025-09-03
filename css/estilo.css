@@ -6,3 +6,11 @@
   0% { transform: translateX(-100%) skewX(-20deg); }
   100% { transform: translateX(200%) skewX(-20deg); }
 }
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 0.8em !important;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 0.8rem !important;
+}
