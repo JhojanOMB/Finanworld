@@ -8,6 +8,18 @@
   <link rel="stylesheet" href="./css/estilo.css">
   <link rel="shortcut icon" href="./media/logo.png" type="image/x-icon">
 
+  <!-- Animate.css (v4) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <!-- WOW JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" defer />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" defer />
+
   <!-- Tailwind Play CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -73,44 +85,43 @@
   });
 </script>
 
-
 <!-- HERO -->
-<section class="relative bg-gradient-to-br from-yellow-50 via-white to-slate-50 pt-16 pb-20">
+<section class="relative bg-gradient-to-br from-yellow-50 via-white to-slate-50 pt-16 pb-20 animate__animated animate__fadeIn">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       
       <!-- Texto -->
       <div class="lg:col-span-6 text-center lg:text-left">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight" data-aos="fade-right" data-aos-duration="900" data-aos-delay="120">
           Créditos de libranza <span class="text-yellow-500">para pensionados</span>
         </h1>
-        <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-xl mx-auto lg:mx-0">
+        <p class="mt-6 text-lg sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0" data-aos="fade-up" data-aos-duration="900" data-aos-delay="280">
           Obtén tu crédito fácil y rápido. Con descuento directo de tu pensión, sin trámites engorrosos y con asesoría personalizada en cada paso.
         </p>
 
         <!-- CTA -->
         <div class="mt-8 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
           <button id="openContactHero" 
-            class="inline-flex items-center justify-center gap-2 bg-black text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition">
+            class="inline-flex items-center justify-center gap-2 bg-black text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="420">
             <i class="fa-solid fa-paper-plane"></i> Solicita tu crédito ahora
           </button>
 
           <a href="#beneficios" 
-            class="inline-flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-100 transition">
+            class="inline-flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-100 transition" data-aos="fade-up" data-aos-duration="700" data-aos-delay="520">
             <i class="fa-solid fa-circle-info"></i> Conoce más
           </a>
         </div>
 
         <!-- Beneficios rápidos -->
         <ul class="mt-8 flex flex-wrap justify-center gap-4 text-slate-700">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Aprobación rápida</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-lock text-green-600"></i> Seguridad total</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-percent text-green-600"></i> Tasas competitivas</li>
+          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="600"><i class="fa-solid fa-check text-green-600"></i> Aprobación rápida</li>
+          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="700"><i class="fa-solid fa-lock text-green-600"></i> Seguridad total</li>
+          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="800"><i class="fa-solid fa-percent text-green-600"></i> Tasas competitivas</li>
         </ul>
       </div>
 
       <!-- Imagen / ilustración -->
-      <div class="lg:col-span-6 flex justify-center lg:justify-end">
+      <div class="lg:col-span-6 flex justify-center lg:justify-end" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
         <img src="./media/hero.png" alt="Crédito de libranza para pensionados"
           class="max-w-sm lg:max-w-md">
       </div>
@@ -539,7 +550,6 @@
   </button>
 </div>
 
-
 <!-- SLIDE OVER CONTACT (OFFCANVAS) -->
 <div id="contactPanel" class="fixed inset-0 z-50 hidden">
   <div id="backdrop" class="absolute inset-0 bg-black/40"></div>
@@ -624,6 +634,11 @@
 </script>
 
 <script src="./js/script.js"></script>
+
+<!-- AOS Animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init({duration:800,once:true});</script>
+<script>new WOW({boxClass:'wow',animateClass:'animate__animated',offset:100,mobile:true,live:true}).init();</script>
 
 </body>
 </html>

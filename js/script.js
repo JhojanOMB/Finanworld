@@ -230,3 +230,17 @@ updateWhatsAppLinks();
   });
 
 }); // DOMContentLoaded end
+
+  AOS.init({
+    duration: 800,
+    once: true,
+    offset: 120
+  });
+
+  new WOW({
+    boxClass: 'wow',
+    animateClass: 'animate__animated', // necesario con animate.css v4
+    offset: 100,
+    mobile: true,
+    live: true
+  }).init();
