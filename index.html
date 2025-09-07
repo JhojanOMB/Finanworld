@@ -85,53 +85,85 @@
   });
 </script>
 
-<!-- HERO -->
-<section class="relative bg-gradient-to-br from-yellow-50 via-white to-slate-50 pt-16 pb-20 animate__animated animate__fadeIn">
+<!-- HERO (mejorado, usa solo AOS) -->
+<section class="relative bg-gradient-to-br from-yellow-50 via-white to-slate-50 pt-16 pb-20" aria-label="Hero - Créditos de libranza">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-      
+
       <!-- Texto -->
       <div class="lg:col-span-6 text-center lg:text-left">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight" data-aos="fade-right" data-aos-duration="900" data-aos-delay="120">
+        <!-- Título: entra desde la derecha -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight"
+            data-aos="fade-right"
+            data-aos-duration="900"
+            data-aos-delay="120"
+            data-aos-easing="ease-out-cubic"
+            data-aos-anchor-placement="top-bottom">
           Créditos de libranza <span class="text-yellow-500">para pensionados</span>
         </h1>
-        <p class="mt-6 text-lg sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0" data-aos="fade-up" data-aos-duration="900" data-aos-delay="280">
+
+        <!-- Subtítulo: aparece después, ligeramente más suave -->
+        <p class="mt-6 text-lg sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0"
+           data-aos="fade-up"
+           data-aos-duration="900"
+           data-aos-delay="260"
+           data-aos-easing="ease-out-cubic"
+           data-aos-anchor-placement="top-bottom">
           Obtén tu crédito fácil y rápido. Con descuento directo de tu pensión, sin trámites engorrosos y con asesoría personalizada en cada paso.
         </p>
 
-        <!-- CTA -->
+        <!-- CTA: enfatizada en la secuencia -->
         <div class="mt-8 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-          <button id="openContactHero" 
-            class="inline-flex items-center justify-center gap-2 bg-black text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="420">
+          <button id="openContactHero"
+            class="inline-flex items-center justify-center gap-2 bg-black text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-transform"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-delay="420"
+            aria-label="Solicita tu crédito ahora">
             <i class="fa-solid fa-paper-plane"></i> Solicita tu crédito ahora
           </button>
 
-          <a href="#beneficios" 
-            class="inline-flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-100 transition" data-aos="fade-up" data-aos-duration="700" data-aos-delay="520">
+          <a href="#beneficios"
+            class="inline-flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-100 transition"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-delay="520"
+            data-aos-easing="ease-out-cubic">
             <i class="fa-solid fa-circle-info"></i> Conoce más
           </a>
         </div>
 
-        <!-- Beneficios rápidos -->
+        <!-- Beneficios (stagger coherente) -->
         <ul class="mt-8 flex flex-wrap justify-center gap-4 text-slate-700">
-          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="600"><i class="fa-solid fa-check text-green-600"></i> Aprobación rápida</li>
-          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="700"><i class="fa-solid fa-lock text-green-600"></i> Seguridad total</li>
-          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-delay="800"><i class="fa-solid fa-percent text-green-600"></i> Tasas competitivas</li>
+          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700" data-aos-delay="620"> 
+            <i class="fa-solid fa-check text-green-600" aria-hidden="true"></i> Aprobación rápida
+          </li>
+          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700" data-aos-delay="740"> 
+            <i class="fa-solid fa-lock text-green-600" aria-hidden="true"></i> Seguridad total
+          </li>
+          <li class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700" data-aos-delay="860"> 
+            <i class="fa-solid fa-percent text-green-600" aria-hidden="true"></i> Tasas competitivas
+          </li>
         </ul>
       </div>
 
-      <!-- Imagen / ilustración -->
-      <div class="lg:col-span-6 flex justify-center lg:justify-end" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
-        <img src="./media/hero.png" alt="Crédito de libranza para pensionados"
-          class="max-w-sm lg:max-w-md">
+      <!-- Imagen / ilustración: entra desde la izquierda, con ligeramente menor delay para que coincida -->
+      <div class="lg:col-span-6 flex justify-center lg:justify-end" 
+           data-aos="fade-left"
+           data-aos-duration="900"
+           data-aos-delay="320"
+           data-aos-easing="ease-out-cubic"
+           data-aos-anchor-placement="top-bottom">
+        <img src="./media/hero.png" alt="Persona feliz recibiendo asesoría para crédito de libranza" class="max-w-sm lg:max-w-md" />
       </div>
 
     </div>
   </div>
 
-  <!-- Detalle decorativo -->
-  <div class="absolute inset-0 -z-10 bg-gradient-to-tr from-yellow-100/20 to-transparent"></div>
+  <!-- Detalle decorativo (decorativo: aria-hidden) -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-tr from-yellow-100/20 to-transparent" aria-hidden="true"></div>
 </section>
+
 
 <!-- REQUISITOS -->
 <section id="requisitos" class="py-12">
