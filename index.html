@@ -164,7 +164,6 @@
   <div class="absolute inset-0 -z-10 bg-gradient-to-tr from-yellow-100/20 to-transparent" aria-hidden="true"></div>
 </section>
 
-
 <!-- REQUISITOS -->
 <section id="requisitos" class="py-12">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -558,7 +557,8 @@
   </div>
 </footer>
 
-<div class="wrapper fixed bottom-8 right-10 sm:right-6 md:right-8 flex flex-col gap-4 z-50">
+<!-- BOTONES FLOTANTES -->
+<div class="fixed bottom-8 right-10 sm:right-6 md:right-8 flex flex-col gap-4 z-50">
   <!-- Botón flotante WhatsApp -->
   <a id="waButton" href="#" target="_blank" class="group">
     <div class="bg-green-500 hover:bg-green-600 rounded-full shadow-lg p-2 flex items-center justify-center w-14 h-14 relative">
@@ -569,18 +569,19 @@
       <i class="fa-brands fa-whatsapp text-white text-3xl"></i>
     </div>
   </a>
+</div>
 
-  <!-- Botón flotante Solicita tu crédito -->
+<!-- BOTÓN LATERAL CENTRADO -->
+<div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-50">
   <button id="openContactLateral" class="group">
-    <div class="bg-yellow-500 hover:bg-yellow-600 rounded-full shadow-lg p-2 flex items-center justify-center w-14 h-14 relative">
-      <!-- Tooltip -->
-      <div class="absolute right-full mr-2 px-3 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity border border-black">
+    <div class="bg-yellow-500 hover:bg-yellow-600 rounded-s-full shadow-lg flex items-center justify-center w-10 h-48 relative">
+      <p class="text-black text-sm font-semibold -rotate-90 whitespace-nowrap">
         Solicita tu crédito
-      </div>
-      <i class="fa-solid fa-coins text-black text-2xl"></i>
+      </p>
     </div>
   </button>
 </div>
+
 
 <!-- SLIDE OVER CONTACT (OFFCANVAS) -->
 <div id="contactPanel" class="fixed inset-0 z-50 hidden">
