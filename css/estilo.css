@@ -7,11 +7,15 @@
   100% { transform: translateX(100%)  skewX(-20deg); }
 }
 
-.swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 0.8em !important;
-}
+/* esconder scrollbar (opcional) */
+.no-scrollbar::-webkit-scrollbar{ display: none; }
+.no-scrollbar{ -ms-overflow-style: none; scrollbar-width: none; }
 
-.swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 0.8rem !important;
+/* Si quieres que el nombre no ocupe más de 2 líneas: */
+.carousel-caption {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-

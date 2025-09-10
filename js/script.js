@@ -123,36 +123,6 @@ function updateWhatsAppLinks() {
 }
 updateWhatsAppLinks();
 
-  // --- Carousel aliados (seguro) ---
-  const carousel = $('carousel');
-  const prev = $('prev');
-  const next = $('next');
-  let scrollAmount = 0;
-  let scrollStep = 180; // fallback
-
-  if (carousel) {
-    const firstChild = carousel.firstElementChild;
-    if (firstChild) {
-      const w = firstChild.offsetWidth || 160;
-      const style = getComputedStyle(firstChild);
-      const mr = parseInt(style.marginRight || 0, 10);
-      scrollStep = w + (isNaN(mr) ? 0 : mr);
-    }
-  }
-
-  if (carousel && prev && next) {
-    prev.addEventListener('click', () => {
-      scrollAmount -= scrollStep;
-      if (scrollAmount < 0) scrollAmount = 0;
-      carousel.style.transform = `translateX(-${scrollAmount}px)`;
-    });
-    next.addEventListener('click', () => {
-      scrollAmount += scrollStep;
-      const maxScroll = Math.max(0, carousel.scrollWidth - carousel.parentElement.offsetWidth);
-      if (scrollAmount > maxScroll) scrollAmount = maxScroll;
-      carousel.style.transform = `translateX(-${scrollAmount}px)`;
-    });
-  }
 
   // --- Mobile sidebar + overlay + bloqueo de scroll ---
   const menuBtn = $('menuBtn');
@@ -230,13 +200,6 @@ updateWhatsAppLinks();
   });
 
 }); // DOMContentLoaded end
-
-  AOS.init({
-    duration: 800,
-    once: true,
-    offset: 120
-  });
-
   new WOW({
     boxClass: 'wow',
     animateClass: 'animate__animated', // necesario con animate.css v4
@@ -244,3 +207,148 @@ updateWhatsAppLinks();
     mobile: true,
     live: true
   }).init();
+
+
+// Carrusel script
+// js/script.js  -> pega esto (IIFE dentro de DOMContentLoaded)
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('carouselTrack');
+  const container = document.getElementById('carousel');
+
+  if (!track) {
+    console.warn('[carousel] No se encontró #carouselTrack. Verifica el id en HTML.');
+    return;
+  }
+  if (!container) {
+    console.warn('[carousel] No se encontró #carousel. El script intentará usar el padre de track.');
+  }
+
+  const cont = container || track.parentElement;
+
+  // Config (puedes ajustar desde HTML: data-speed en #carousel)
+  const SPEED_PX_PER_SEC = Number(cont.dataset.speed) || 60;
+  const PAUSE_ON_HOVER = true;
+  const RESUME_AFTER_BTN_MS = 700; // reanuda animación después de usar prev/next
+
+  // seguridad: no inicializar dos veces
+  if (!track.dataset.loopInitialized) {
+    // si track está vacío, no hacemos nada
+    if (!track.children.length) {
+      console.warn('[carousel] #carouselTrack no tiene items hijos.');
+      return;
+    }
+    // duplicar contenido para crear loop continuo
+    track.innerHTML = track.innerHTML + track.innerHTML;
+    track.dataset.loopInitialized = "1";
+    console.log('[carousel] Contenido duplicado para loop infinito.');
+  } else {
+    console.log('[carousel] Ya inicializado (dataset.loopInitialized).');
+  }
+
+  // Preparar estilos / comportamiento
+  try {
+    track.style.scrollBehavior = 'auto';
+    cont.style.overflow = 'hidden';
+    track.style.overflowX = 'hidden';
+    // si tenías clases de snap, quitarlas para animación continua
+    track.classList.remove('snap-x', 'snap-mandatory');
+  } catch (e) {
+    console.warn('[carousel] Error aplicando estilos: ', e);
+  }
+
+  let raf = null;
+  let lastTs = null;
+  let running = true;
+
+  function step(ts) {
+    if (!lastTs) lastTs = ts;
+    const dt = ts - lastTs;
+    lastTs = ts;
+
+    // avanzar scroll
+    track.scrollLeft += (SPEED_PX_PER_SEC * dt) / 1000;
+
+    // si pasamos la mitad (duplicación), regresamos a la mitad anterior
+    const half = track.scrollWidth / 2;
+    if (track.scrollLeft >= half) {
+      track.scrollLeft -= half;
+    }
+
+    if (running) raf = requestAnimationFrame(step);
+  }
+
+  function start() {
+    if (!running) running = true;
+    if (!raf) {
+      lastTs = null;
+      raf = requestAnimationFrame(step);
+    }
+  }
+  function stop() {
+    running = false;
+    lastTs = null;
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+    }
+  }
+
+  // pause on hover / touch
+  if (PAUSE_ON_HOVER) {
+    cont.addEventListener('mouseenter', stop, { passive: true });
+    cont.addEventListener('mouseleave', start, { passive: true });
+    cont.addEventListener('touchstart', stop, { passive: true });
+    cont.addEventListener('touchend', start, { passive: true });
+  }
+
+  // Prev / Next buttons (si existen)
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  function scrollByPage(dir = 1) {
+    // dir = -1 prev, 1 next
+    // scrolla una "página" = ancho del contenedor visible
+    const page = cont.clientWidth || window.innerWidth;
+    // hacemos smooth y luego reanudamos animación
+    stop();
+    track.scrollBy({ left: dir * page, behavior: 'smooth' });
+    // si la duplicación hace que lleguemos al final, corregimos luego
+    setTimeout(() => {
+      const half = track.scrollWidth / 2;
+      if (track.scrollLeft >= half) track.scrollLeft = track.scrollLeft % half;
+    }, 400);
+    // reanuda después de un tiempo
+    setTimeout(start, RESUME_AFTER_BTN_MS);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollByPage(-1);
+    });
+    console.log('[carousel] Prev button conectado.');
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollByPage(1);
+    });
+    console.log('[carousel] Next button conectado.');
+  }
+
+  // Ajustes en resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // asegurar que scrollLeft está en rango válido tras resize
+      const half = track.scrollWidth / 2;
+      if (track.scrollLeft >= half) track.scrollLeft = track.scrollLeft % half;
+    }, 120);
+  });
+
+  // start
+  track.scrollLeft = 0;
+  start();
+  console.log('[carousel] iniciado con speed:', SPEED_PX_PER_SEC);
+});
